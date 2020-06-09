@@ -1,0 +1,3 @@
+select n, (case when connect_by_isleaf=1 then 'Leaf'
+           when p is null then 'Root'
+           else 'Inner' end) from BST start with p is null connect by prior n=p order by n;
