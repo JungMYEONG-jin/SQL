@@ -1,0 +1,25 @@
+declare @table TABLE (primenumber int)
+declare @final as varchar(1500)
+set @final = ' '
+
+
+declare @counter int
+set @counter = 2
+
+
+while @counter<=1000
+begin
+    if not exists (
+        select primenumber
+        from @table
+        where @counter % primenumber=0)
+    begin
+        insert into @table select @counter
+        set @final = @final + cast(@counter as varchar(20))+'&'
+    end
+     set @counter = @counter + 1
+end
+
+
+select substring(@final, 0, len(@final))
+
