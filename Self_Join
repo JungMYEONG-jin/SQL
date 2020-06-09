@@ -1,0 +1,15 @@
+select round(long_w, 4) from station where lat_n in (select min(s.lat_n) from station s where s.lat_n>38.7780);
+
+
+
+
+select round(abs(min(lat_n)-max(lat_n))+abs(max(long_w)-min(long_w)),4) from station;
+
+
+
+select round(sqrt(power(min(lat_n)-max(lat_n),2)+power(max(long_w)-min(long_w),2)),4) from station;
+
+
+select if(g.grade<8, null , s. name), g.grade, s.marks
+from students s join grades g on (s.marks between g.min_mark and g.max_mark)
+order by g.grade desc, s.name, s.marks;
