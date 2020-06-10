@@ -1,3 +1,17 @@
 select n, (case when connect_by_isleaf=1 then 'Leaf'
            when p is null then 'Root'
            else 'Inner' end) from BST start with p is null connect by prior n=p order by n;
+
+
+모범답안은
+
+SELECT N,
+    CASE
+        WHEN P IS null THEN 'Root'
+        WHEN N IN (SELECT DISTINCT P FROM BST) THEN  'Inner'
+        ELSE 'Leaf'
+    END
+FROM BST
+ORDER BY N;
+
+이거라함 
