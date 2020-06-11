@@ -1,0 +1,4 @@
+select m.name from (select s.id, salary, name from students s, packages p where s.id=p.id) m
+join (select salary, friends.id from packages, friends where friend_id=packages.id) f 
+on (m.id=f.id)
+where m.salary<f.salary order by f.salary;
